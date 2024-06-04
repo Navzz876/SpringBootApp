@@ -3,6 +3,7 @@ package com.example.SpringBootApp.services;
 import com.example.SpringBootApp.entities.Employee;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,16 +12,23 @@ import java.util.List;
 
 public class EmployeeService {
 
-
-    public List<Employee> getAllEmployees(){
-        List<Employee> employeeList = Arrays.asList(
-                new Employee(1,"John","Texas"),
-                new Employee(2, "Amy", "Kansas"),
-                new Employee(3, "Peter", "Colorado"),
-                new Employee(4, "Josh", "New Mexico"),
-                new Employee(5, "Tracy", "Washington DC")
-        );
+    List<Employee> employeeList = new ArrayList<Employee>(Arrays.asList(
+            new Employee(1,"John","Texas"),
+            new Employee(2, "Amy", "Kansas"),
+            new Employee(3, "Peter", "Colorado"),
+            new Employee(4, "Josh", "New Mexico"),
+            new Employee(5, "Tracy", "Washington DC")));
+    public List<Employee> getAllEmployees()
+    {
         return employeeList;
     }
+    public Employee GetEmployee(int id)
+    {
+        return  employeeList.stream().filter(employee -> employee.getEmployeeId() == id).findFirst().get();
+    }
+    public void CreateEmployee(Employee employee)
+    {
+        employeeList.add(employee); //TODO: Add it with DB
+    }
     } // Now the business logic, that is adding employees is going in the service
-// class instead of the controller. Sort of like an action method in .NET
+// class instead of the controller. Sort of like a service class in .NET
