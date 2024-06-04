@@ -30,5 +30,24 @@ public class EmployeeService {
     {
         employeeList.add(employee); //TODO: Add it with DB
     }
+    public void updateEmployee(Employee employee)
+    {
+       List<Employee> tempEmployees = new ArrayList<>();
+       for(Employee emp : employeeList)
+       {
+            if(emp.getEmployeeId() == employee.getEmployeeId())
+            {
+                emp.setEmployeeName(employee.getEmployeeName());
+                emp.setEmployeeCity(employee.getEmployeeCity());
+            }
+            tempEmployees.add(emp);
+       }
+       this.employeeList= tempEmployees;
+    }
+    public void deleteEmployee(int id)
+    {
+      Employee emp=  employeeList.stream().filter(employee -> employee.getEmployeeId() == id).findFirst().get();
+      employeeList.remove(emp);
+    }
     } // Now the business logic, that is adding employees is going in the service
 // class instead of the controller. Sort of like a service class in .NET

@@ -37,10 +37,27 @@ public class EmployeeController {
     @RequestMapping(value = "/employees", method = RequestMethod.POST) // To add a post request,
     // we need to add a method called Post with the RequestMethod enum,
     // very much like form tag but there we add it as string
+
     public void CreateEmployee(@RequestBody Employee employee) // RequestBody
     // annotation is going to get the employee details from the request body that
     // we are going to pass to the API externally, for now in Postman.
     {
         employeeService.CreateEmployee(employee);
     }
+    @RequestMapping(value="/employees/{id}", method = RequestMethod.PUT)
+    public void UpdateEmployee(@PathVariable int id, @RequestBody Employee employee)
+    {
+        employeeService.updateEmployee(employee);
+    }
+    @RequestMapping(value="/employees/{id}", method= RequestMethod.DELETE)
+    public void DeleteEmployee(@PathVariable int id)
+    {
+        employeeService.deleteEmployee(id);
+    }
+    //We can also have request specific mapping annotation instead of adding RequestMapping(value,method) for GET,POST,PUT and DELETE
+    //They are @GetMapping, @PostMapping, @PutMapping and @DeleteMapping. We can just
+    // add these annotations directly along with the API path, so we do not explicitly
+    // have to add the method parameter. So it is easier.
+
+
 }
